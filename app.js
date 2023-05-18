@@ -1,10 +1,16 @@
 const app = require("fastify")({logger:true})
-const ejs = require("ejs");
-
-app.get('/', async (request, reply) => {
-  return { hello: 'world' }
+const middie = require('@fastify/middie');
+const mainRoute = require("./routes/mainRoutes")
+app.register(require("@fastify/view"), {
+  engine: {
+    ejs: require("ejs"),
+  },
+  templates:"views"
+});
+app.get('/', (request, reply) => {
+  reply.view("index",{message:"HELLO FASTİFY"})
 })
-
+app.register(mainRoute, { prefix: '/' })
 const start = async () => {
   try {
     await app.listen({ port: 3000 })
