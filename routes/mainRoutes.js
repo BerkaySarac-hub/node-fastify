@@ -1,8 +1,12 @@
 const app = require("fastify")({logger:true})
 
-app.get('/',(request,reply)=>{
-    res.send({
-        title:"HOME w Fastify",
-        message : "You are at home now !"
+async function mainRoutes(fastify,options,done){
+    app.get("/",(req,rep)=>{
+        rep.view("index",{
+            title : "Home"
+        })
     })
-})
+    done();
+}
+
+module.exports = mainRoutes

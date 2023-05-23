@@ -7,9 +7,7 @@ app.register(require("@fastify/view"), {
   },
   templates:"views"
 });
-app.get('/', (request, reply) => {
-  reply.view("index",{message:"HELLO FASTİFY"})
-})
+
 app.register(mainRoute, { prefix: '/' })
 const start = async () => {
   try {
